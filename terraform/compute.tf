@@ -1,6 +1,6 @@
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_dir  = "../lambda" 
+  source_dir  = "../lambda"
   output_path = "lambda_function.zip"
 }
 
@@ -20,9 +20,9 @@ resource "aws_iam_role" "lambda_exec_role" {
 }
 
 resource "aws_iam_role_policy" "dynamodb_access" {
-  name   = "dynamodb_access_policy"
-  role   = aws_iam_role.lambda_exec_role.id
-  
+  name = "dynamodb_access_policy"
+  role = aws_iam_role.lambda_exec_role.id
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{

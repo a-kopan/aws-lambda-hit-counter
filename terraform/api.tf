@@ -21,7 +21,7 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
   api_id             = aws_apigatewayv2_api.http_api.id
   integration_type   = "AWS_PROXY"
   integration_uri    = aws_lambda_function.visitor_counter_lambda.invoke_arn
-  integration_method = "POST" 
+  integration_method = "POST"
 }
 
 resource "aws_apigatewayv2_route" "post_count" {
