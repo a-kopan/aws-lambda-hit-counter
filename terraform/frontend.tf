@@ -80,9 +80,16 @@ resource "aws_s3_object" "index" {
 resource "aws_s3_object" "script" {
   bucket       = aws_s3_bucket.website_bucket.id
   key          = "script.js"
-  source       = "../website/script.js"
+  
+  content = templatefile("../website/script.js", {
+    api_url = "${aws_apigatewayv2_api.http_api.api_endpoint}/count"
+  })
+  
   content_type = "application/javascript"
-  etag         = filemd5("../website/script.js")
+  
+  etag = md5(templatefile("../website/script.js", {
+    api_url = "${aws_apigatewayv2_api.http_api.api_endpoint}/count"
+  }))
 }
 
 resource "aws_s3_object" "styles" {
